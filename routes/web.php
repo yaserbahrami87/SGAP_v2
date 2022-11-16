@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::middleware(['can:isAdmin'])->prefix('panel')->group(function () {
+    Route::get('/dashboard', 'HomeController@index')->name('home');
+    Route::resource('user','UserController');
+});
 
-
-Route::get('/panel', 'HomeController@index')->name('home');
